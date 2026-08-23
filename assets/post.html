@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Munder Difflin - LinkedIn Post</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 2400px;
+      height: 2400px;
+      font-family: 'Chakra Petch', sans-serif;
+      overflow: hidden;
+      background: #0a0020;
+    }
+    
+    .container {
+      width: 2400px;
+      height: 2400px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 120px;
+    }
+    
+    /* Background gradient blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.6;
+    }
+    
+    .blob-1 {
+      width: 800px;
+      height: 800px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      top: 200px;
+      right: 200px;
+      animation: float1 15s ease-in-out infinite;
+    }
+    
+    .blob-2 {
+      width: 600px;
+      height: 600px;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      bottom: 400px;
+      left: 300px;
+      animation: float2 18s ease-in-out infinite;
+    }
+    
+    .blob-3 {
+      width: 500px;
+      height: 500px;
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: float3 20s ease-in-out infinite;
+    }
+    
+    @keyframes float1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-50px, 30px) scale(1.1); }
+    }
+    
+    @keyframes float2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, -50px) scale(0.95); }
+    }
+    
+    @keyframes float3 {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-45%, -55%) scale(1.05); }
+    }
+    
+    /* Scanlines overlay */
+    .scanlines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1) 0px,
+        rgba(0, 0, 0, 0.1) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    /* Vignette */
+    .vignette {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, transparent 0%, rgba(10, 0, 32, 0.6) 100%);
+      pointer-events: none;
+      z-index: 11;
+    }
+    
+    /* Bauhaus shapes */
+    .bauhaus-shape {
+      position: absolute;
+      opacity: 0.12;
+    }
+    
+    .shape-1 {
+      width: 200px;
+      height: 200px;
+      border: 8px solid #d4ff00;
+      top: 150px;
+      left: 150px;
+      transform: rotate(15deg);
+    }
+    
+    .shape-2 {
+      width: 150px;
+      height: 150px;
+      background: #ff6b6b;
+      border-radius: 50%;
+      bottom: 200px;
+      right: 250px;
+    }
+    
+    .shape-3 {
+      width: 0;
+      height: 0;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-bottom: 180px solid #4facfe;
+      top: 800px;
+      right: 400px;
+      transform: rotate(-10deg);
+      opacity: 0.1;
+    }
+    
+    .shape-4 {
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      top: 1200px;
+      left: 200px;
+      transform: rotate(45deg);
+      opacity: 0.15;
+    }
+    
+    /* Logo */
+    .logo-container {
+      position: absolute;
+      top: 120px;
+      right: 120px;
+      width: 200px;
+      height: 200px;
+      z-index: 20;
+    }
+    
+    .logo {
+      width: 100%;
+      height: 100%;
+      background-image: url('varritech-logo.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      filter: invert(1) brightness(2);
+    }
+    
+    /* Main content */
+    .content {
+      position: relative;
+      z-index: 15;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    /* Hook with strikethrough */
+    .hook-container {
+      margin-bottom: 80px;
+    }
+    
+    .hook-strikethrough {
+      font-size: 72px;
+      font-weight: 700;
+      color: #666;
+      text-decoration: line-through;
+      text-decoration-color: #d4ff00;
+      text-decoration-thickness: 4px;
+      margin-bottom: 20px;
+    }
+    
+    .hook-pivot {
+      font-size: 96px;
+      font-weight: 700;
+      color: #d4ff00;
+      line-height: 1.1;
+    }
+    
+    /* Stat pills */
+    .stats {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 100px;
+    }
+    
+    .stat-pill {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 40px 60px;
+      flex: 1;
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 84px;
+      font-weight: 700;
+      color: #ffffff;
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    .stat-label {
+      font-size: 32px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 400;
+    }
+    
+    /* Glassmorphism diff card */
+    .diff-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(30px);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      padding: 60px;
+      margin-bottom: 80px;
+    }
+    
+    .diff-title {
+      font-size: 48px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    
+    .diff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    
+    .diff-item {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 15px;
+      padding: 30px;
+    }
+    
+    .diff-item.old {
+      border-left: 6px solid #ff6b6b;
+    }
+    
+    .diff-item.new {
+      border-left: 6px solid #d4ff00;
+    }
+    
+    .diff-label {
+      font-size: 28px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .diff-value {
+      font-size: 42px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    
+    .diff-value.expensive {
+      color: #ff6b6b;
+    }
+    
+    .diff-value.cheap {
+      color: #d4ff00;
+    }
+    
+    /* CTA */
+    .cta-container {
+      text-align: center;
+    }
+    
+    .cta-text {
+      font-size: 56px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 40px;
+      letter-spacing: 2px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #d4ff00 0%, #a8e000 100%);
+      color: #0a0020;
+      font-size: 48px;
+      font-weight: 700;
+      padding: 50px 100px;
+      border-radius: 25px;
+      text-decoration: none;
+      box-shadow: 0 10px 40px rgba(212, 255, 0, 0.3);
+    }
+    
+    /* Tagline */
+    .tagline {
+      position: absolute;
+      bottom: 120px;
+      left: 120px;
+      font-size: 42px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.5);
+      font-style: italic;
+      z-index: 15;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Background blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    
+    <!-- Scanlines and vignette -->
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    
+    <!-- Bauhaus shapes -->
+    <div class="bauhaus-shape shape-1"></div>
+    <div class="bauhaus-shape shape-2"></div>
+    <div class="bauhaus-shape shape-3"></div>
+    <div class="bauhaus-shape shape-4"></div>
+    
+    <!-- Logo -->
+    <div class="logo-container">
+      <div class="logo"></div>
+    </div>
+    
+    <!-- Main content -->
+    <div class="content">
+      <!-- Hook -->
+      <div class="hook-container">
+        <div class="hook-strikethrough">Hire more engineers</div>
+        <div class="hook-pivot">Clone your best ones instead</div>
+      </div>
+      
+      <!-- Stats -->
+      <div class="stats">
+        <div class="stat-pill">
+          <span class="stat-value">$200K</span>
+          <span class="stat-label">Senior engineer salary</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-value">$800</span>
+          <span class="stat-label">AI agent monthly cost</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-value">24/7</span>
+          <span class="stat-label">Agent uptime</span>
+        </div>
+      </div>
+      
+      <!-- Diff card -->
+      <div class="diff-card">
+        <div class="diff-title">The Math</div>
+        <div class="diff-grid">
+          <div class="diff-item old">
+            <div class="diff-label">Traditional hiring</div>
+            <div class="diff-value expensive">$15-30K/month<br><span style="font-size: 28px; color: rgba(255,255,255,0.5)">per engineer</span></div>
+          </div>
+          <div class="diff-item new">
+            <div class="diff-label">Agent clones</div>
+            <div class="diff-value cheap">$800/month<br><span style="font-size: 28px; color: rgba(255,255,255,0.5)">self-hosted</span></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- CTA -->
+      <div class="cta-container">
+        <div class="cta-text">FORK THE REPO → BUILD YOUR ARMY</div>
+        <div class="cta-button">github.com/Varritech/munder-difflin-guide</div>
+      </div>
+    </div>
+    
+    <!-- Tagline -->
+    <div class="tagline">Bold ideas wait for no one.</div>
+  </div>
+</body>
+</html>
